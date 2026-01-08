@@ -9,7 +9,9 @@ public class GenericWorksheet<E extends Comparable<E>> {
     }
 
     public GenericWorksheet(E[] data) {
-        this.data = Arrays.copyOf(data, data.length);
+        // shallow copy
+        this.data = data;
+
     }
 
     public E findMedian() {
@@ -22,6 +24,7 @@ public class GenericWorksheet<E extends Comparable<E>> {
                 }
             }
         }
+
         int n = data.length;
 
         return data[data.length / 2];
@@ -34,19 +37,30 @@ public class GenericWorksheet<E extends Comparable<E>> {
     public E removeFirst() {
 
         E[] newArr = (E[]) new Object[data.length - 1];
-        E first = data[0];
         for (int i = 1; i < data.length; i++) {
             newArr[i - 1] = data[i];
         }
-        return E;
+        E first = data[0];
+        data = newArr;
+        return first;
     }
 
     @Override
     public String toString() {
+        if (data == null) {
+            return null;
+        }
         String str = "";
         for (int i = 0; i < data.length; i++) {
             str += data[i];
         }
         return str;
+    }
+
+    public static void main(String[] args) {
+        Integer[] arr = new Integer[] { 1, 4, 5, 1, 2, 5 };
+        GenericWorksheet<Integer> ref = new GenericWorksheet<>(arr);
+        ref.findLast();
+        ref.findMedian();
     }
 }
