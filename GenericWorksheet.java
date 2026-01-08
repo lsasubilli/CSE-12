@@ -16,13 +16,13 @@ public class GenericWorksheet<E extends Comparable<E>> {
         for (int i = 0; i < data.length; i++) {
             for (int j = 0; j < data.length - 1; j++) {
                 if (data[j].compareTo(data[j + 1]) > 0) {
-                    int temp = data[j];
+                    E temp = data[j];
                     data[j] = data[j + 1];
                     data[j + 1] = temp;
                 }
             }
         }
-        int n = arr.length;
+        int n = data.length;
 
         return data[data.length / 2];
     }
@@ -32,11 +32,13 @@ public class GenericWorksheet<E extends Comparable<E>> {
     }
 
     public E removeFirst() {
+
         E[] newArr = (E[]) new Object[data.length - 1];
-        for (int i = 1; i < newArr.length; i++) {
+        E first = data[0];
+        for (int i = 1; i < data.length; i++) {
             newArr[i - 1] = data[i];
         }
-        return newArr;
+        return E;
     }
 
     @Override
